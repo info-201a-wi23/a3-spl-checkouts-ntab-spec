@@ -1,11 +1,16 @@
 ---
-title: "A3: SPL Library Checkouts"
-output: html_document
+title: 'A3: SPL Library Checkouts'
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ### Introduction
 
 An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+
+>>"The SPL Checkout dataset is a comprehensive record of all books borrowed from the Seattle Public Library between 2022 and 2023. My goal is to analyze trends for both physical and digital books and compare them to identify significant patterns. The dataset includes information on different types of items, such as ebooks, audiobooks, videos, songs, and physical books, which I will examine for patterns of borrowing. By analyzing the trends in the dataset, I hope to identify the most frequently borrowed items, popular genres, and changing borrowing patterns over time. Ultimately, this analysis can provide valuable insights into the reading habits and preferences of Seattle library patrons, which can inform the library's collection development strategies and services.
+
 
 ### Summary Information
 
@@ -13,21 +18,58 @@ Write a summary paragraph of findings that includes the 5 values calculated from
 
 These will likely be calculated using your DPLYR skills, answering questions such as:
 
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
+- What is the average number of checkouts for digital items?
+- What is the top 10 books with the highest number of checkouts in the dataset?
+- What is the the total checkouts of physical books by month?
 
-Feel free to calculate and report values that you find relevant.
 
 ### The Dataset
 
-- Who collected/published the data?  
+- Who collected/published the data? 
+  >
+  The Seattle Public Library SPL
+  
 - What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
+
+
+  >UsageClass
+    CheckoutType
+    MaterialType
+    CheckoutYear
+    CheckoutMonth
+    Checkouts
+    Title
+    ISBN
+    Creator
+    Subjects
+    Publisher
+    PublicationYear
+
 - How was the data collected or generated?  
+  >Rows 42M
+  Columns 12
+  Each row is a
+  Checkout Count
+
 - Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
+  >>One reason why someone may have created this dataset is to study the patterns of library usage, including which types of materials are checked out the most, which authors and publishers are preferred, and how usage changes over time. This data could help inform decisions about how to develop the library's collection, advertise, and allocate resources. Additionally, analyzing the data could provide insight into the reading and media consumption habits of library visitors. However, it is unclear without more information why the dataset was created in the first place.
+
+
+
+
+- What, if any, ethical questions do you need to consider when working with this data?
+
+>>One ethical concern to keep in mind when using the "Checkouts by Title SPL" dataset is the possibility of bias and discrimination. If the data is used to decide which materials the library should focus on acquiring or promoting, it could lead to biased decisions that disadvantage certain authors or genres. For instance, if the data shows that some types of books are more popular than others, the library might prioritize them over less popular ones, which could leave out minority voices and perspectives.
+
+
+
+
+
 - What are possible limitations or problems with this data?   (at least 200 words)
+
+>>The "Checkouts by Title SPL" dataset is useful for investigating library usage trends, but it also has certain limitations and biases that need to be taken into account when analyzing the data. One limitation is that the dataset only covers a specific time period, which may not allow for long-term trends in library usage to be recognized. Additionally, data quality is a concern because human errors during data entry may impact the accuracy and reliability of the dataset.Furthermore, the dataset's scope is limited to a few variables, such as title, author, and publication year, which means that it may not be possible to explore more complex research questions that require additional variables like patron demographics. Finally, while the dataset is anonymized, it still includes personal information about library patrons, which could pose a privacy risk if it were to be mishandled or accessed by unauthorized individuals.Therefore, researchers must be cautious when interpreting the findings of this dataset and draw conclusions carefully. It's important to consider the dataset's limitations and biases and take steps to address them, such as accounting for the dataset's limited scope when designing research questions or checking data quality. By taking these considerations into account, researchers can use this dataset effectively to identify useful insights and inform decisions about library collection development, marketing, and resource allocation.
+
+
 
 
 ### First Trends Over Time Chart
@@ -37,7 +79,10 @@ Include a chart. Make sure to describe why you included the chart, and what patt
 The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
 
 - Show more than one, but fewer than ~10 trends
+
+
   - For example, two books, or 5 different mediums
+  
 - You must have clear x and y axis labels
 - The chart needs a clear title 
 - You need a legend for your different line colors and a clear - legend title
@@ -45,9 +90,37 @@ In your .Rmd file, make sure to describe why you included the chart, and what pa
 
 When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
 
-Here's an example of how to run an R script inside an RMarkdown file:
 
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+>>The purpose of this chart was to display the trends over time for the two most commonly borrowed material types from the Seattle Public Library, which were physical books and e-books, during the period of 2022 to 2023. The chart illustrated the number of checkouts for both types of materials over the course of a year, with clear x and y-axis labels and a legend for different line colors. The chart revealed that the number of checkouts for physical books remained relatively stable throughout the year, with a minor increase during the summer months. In contrast, e-book checkouts steadily increased throughout the year and peaked in December. This pattern highlighted the rising popularity of e-books and how they have increasingly become a preferred option for library patrons over the years.
+
+
+
+
+``````{r, echo = FALSE, warning = FALSE, code = readLines("~/Bar_Chart_Dates_TT1.R")}
+library(dplyr)
+library(ggplot2)
+
+
+library_data_set <- read.csv("~/Documents/info201/a3-spl-checkouts-ntab-spec/2022-2023-All-Checkouts-SPL-Data.csv")
+
+library_data_set_dates <- library_data_set %>%
+  mutate(date = as.Date(paste(CheckoutYear, CheckoutMonth, "1", sep = "/")))
+
+# Select relevant columns and group by MaterialType and date
+trend_data <- library_data_set_dates %>%
+  select(MaterialType, date, Checkouts) %>%
+  filter(MaterialType %in% c("BOOK", "EBOOK")) %>%
+  group_by(MaterialType, date) %>%
+  summarize(total_checkouts = sum(Checkouts))
+
+# Create a bar chart showing the trend of total checkouts for BOOKs and EBOOKs over time
+ggplot(trend_data, aes(x = date, y = total_checkouts, fill = MaterialType)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  xlab("Date") +
+  ylab("Total Checkouts") +
+  ggtitle("Trend of Checkouts for BOOKs and EBOOKs Over Time") +
+  scale_fill_discrete(name = "Material Type")
+
 ```
 
 ### Second Trends Over Time Chart
@@ -65,9 +138,30 @@ In your .Rmd file, make sure to describe why you included the chart, and what pa
 
 When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
 
-Here's an example of how to run an R script inside an RMarkdown file:
+>>The purpose of this chart was to visually represent the top five material types borrowed from the Seattle Public Library between 2022 and 2023. By displaying the number of checkouts for each material type, the chart reveals that physical books were the most popular type borrowed from the library, followed by ebooks, audiobooks, songs, and videos. The chart also highlights the significant difference between the number of checkouts for physical books and ebooks, indicating that physical books were still the preferred choice for most library patrons. This information can be valuable in making informed decisions related to collection development and resource allocation. Overall, the chart provides insights into the borrowing and reading habits of library patrons and can be used to inform future decisions related to library operations.
 
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+
+
+``````{r, echo = FALSE, code = readLines("~/The_Top_Materials_TT_2.R")}
+library(ggplot2)
+library(dplyr)
+
+# Read in the library dataset
+library_data_set <- read.csv("~/Documents/info201/a3-spl-checkouts-ntab-spec/2022-2023-All-Checkouts-SPL-Data.csv")
+
+# Get the top 5 most checked-out material types
+top_materials <- library_data_set %>%
+  group_by(MaterialType) %>%
+  summarize(checkouts = sum(Checkouts)) %>%
+  top_n(5)
+
+# Create a bar chart
+ggplot(top_materials, aes(x = MaterialType, y = checkouts, fill = MaterialType)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Top 5 Most Checked-Out Material Types",
+       x = "Material Type",
+       y = "Number of Checkouts",
+       fill = "Material Type")
 ```
 
 ### Your Choice
@@ -78,9 +172,33 @@ The last chart is up to you. It could be a line plot, scatter plot, histogram, b
 - The chart needs a clear title 
 - You need a legend for your different line colors and a clear legend title
 
-Here's an example of how to run an R script inside an RMarkdown file:
+>>The chart was created to present a visual representation of the monthly checkouts for different material types borrowed from the Seattle Public Library from 2022 to 2023. The chart depicts stacked bars for physical books, ebooks, audiobooks, songs, and videos, each with a unique color to distinguish them. The chart demonstrates that physical books were the most frequently borrowed material type throughout the year, followed by ebooks, audiobooks, songs, and videos. It further highlights that there was a constant increase in the number of checkouts for ebooks and audiobooks throughout the year, with a peak in December, while physical books remained steady, with a slight increase in the summer. This chart provides a valuable resource for library resource allocation and collection development by revealing the borrowing patterns of library patrons.
 
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+
+
+``````{r, echo = FALSE, code = readLines("~/Monthly Checkouts by Material Type_TT_3.R")}
+library(dplyr)
+library(ggplot2)
+
+# Read in the library data set
+library_data_set <- read.csv("~/Documents/info201/a3-spl-checkouts-ntab-spec/2022-2023-All-Checkouts-SPL-Data.csv")
+
+# Aggregate by material type and month
+library_data_set_agg <- library_data_set %>%
+  group_by(MaterialType, CheckoutMonth, .groups = "drop") %>%
+  summarise(count = n())
+
+# Plot the stacked bar chart
+ggplot(data = library_data_set_agg, aes(x = CheckoutMonth, y = count, fill = MaterialType)) +
+  geom_bar(stat = "identity") +
+  xlab("Month") +
+  ylab("Number of Checkouts") +
+  ggtitle("Monthly Checkouts by Material Type") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_discrete(name = "Material Type")
+
+# Save the plot as a PNG file with a width of 10 inches and a height of 5 inches
+ggsave("monthly_checkouts.png", width = 10, height = 5)
 ```
 
 

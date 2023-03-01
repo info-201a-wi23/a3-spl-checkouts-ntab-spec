@@ -1,0 +1,320 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={A3: SPL Library Checkouts},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{A3: SPL Library Checkouts}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\subsubsection{Introduction}\label{introduction}}
+
+An introduction of the data and a description of the trends/books/items
+you are choosing to analyze (and why!)
+
+\begin{quote}
+\begin{quote}
+``The SPL Checkout dataset is a comprehensive record of all books
+borrowed from the Seattle Public Library between 2022 and 2023. My goal
+is to analyze trends for both physical and digital books and compare
+them to identify significant patterns. The dataset includes information
+on different types of items, such as ebooks, audiobooks, videos, songs,
+and physical books, which I will examine for patterns of borrowing. By
+analyzing the trends in the dataset, I hope to identify the most
+frequently borrowed items, popular genres, and changing borrowing
+patterns over time. Ultimately, this analysis can provide valuable
+insights into the reading habits and preferences of Seattle library
+patrons, which can inform the library's collection development
+strategies and services.
+\end{quote}
+\end{quote}
+
+\hypertarget{summary-information}{%
+\subsubsection{Summary Information}\label{summary-information}}
+
+Write a summary paragraph of findings that includes the 5 values
+calculated from your summary information R script
+
+These will likely be calculated using your DPLYR skills, answering
+questions such as:
+
+\begin{itemize}
+\tightlist
+\item
+  What is the average number of checkouts for digital items?
+\item
+  What is the top 10 books with the highest number of checkouts in the
+  dataset?
+\item
+  What is the the total checkouts of physical books by month?
+\item
+\item
+\end{itemize}
+
+Feel free to calculate and report values that you find relevant.
+
+\hypertarget{the-dataset}{%
+\subsubsection{The Dataset}\label{the-dataset}}
+
+\begin{itemize}
+\item
+  Who collected/published the data? \textgreater\textgreater The Seattle
+  Public Library SPL
+\item
+  What are the parameters of the data (dates, number of checkouts, kinds
+  of books, etc.)?
+
+  \begin{quote}
+  \begin{quote}
+  UsageClass CheckoutType MaterialType CheckoutYear CheckoutMonth
+  Checkouts Title ISBN Creator Subjects Publisher PublicationYear
+  \end{quote}
+  \end{quote}
+\item
+  How was the data collected or generated?\\
+  \textgreater Rows 42M Columns 12 Each row is a Checkout Count
+\item
+  Why was the data collected?\\
+  \textgreater\textgreater One reason why someone may have created this
+  dataset is to study the patterns of library usage, including which
+  types of materials are checked out the most, which authors and
+  publishers are preferred, and how usage changes over time. This data
+  could help inform decisions about how to develop the library's
+  collection, advertise, and allocate resources. Additionally, analyzing
+  the data could provide insight into the reading and media consumption
+  habits of library visitors. However, it is unclear without more
+  information why the dataset was created in the first place.
+\item
+  What, if any, ethical questions do you need to consider when working
+  with this data?
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+One ethical concern to keep in mind when using the ``Checkouts by Title
+SPL'' dataset is the possibility of bias and discrimination. If the data
+is used to decide which materials the library should focus on acquiring
+or promoting, it could lead to biased decisions that disadvantage
+certain authors or genres. For instance, if the data shows that some
+types of books are more popular than others, the library might
+prioritize them over less popular ones, which could leave out minority
+voices and perspectives.
+\end{quote}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  What are possible limitations or problems with this data? (at least
+  200 words)
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+The ``Checkouts by Title SPL'' dataset is useful for investigating
+library usage trends, but it also has certain limitations and biases
+that need to be taken into account when analyzing the data. One
+limitation is that the dataset only covers a specific time period, which
+may not allow for long-term trends in library usage to be recognized.
+Additionally, data quality is a concern because human errors during data
+entry may impact the accuracy and reliability of the dataset.
+Furthermore, the dataset's scope is limited to a few variables, such as
+title, author, and publication year, which means that it may not be
+possible to explore more complex research questions that require
+additional variables like patron demographics. Finally, while the
+dataset is anonymized, it still includes personal information about
+library patrons, which could pose a privacy risk if it were to be
+mishandled or accessed by unauthorized individuals.Therefore,
+researchers must be cautious when interpreting the findings of this
+dataset and draw conclusions carefully. It's important to consider the
+dataset's limitations and biases and take steps to address them, such as
+accounting for the dataset's limited scope when designing research
+questions or checking data quality. By taking these considerations into
+account, researchers can use this dataset effectively to identify useful
+insights and inform decisions about library collection development,
+marketing, and resource allocation.
+\end{quote}
+\end{quote}
+
+\hypertarget{first-trends-over-time-chart}{%
+\subsubsection{First Trends Over Time
+Chart}\label{first-trends-over-time-chart}}
+
+Include a chart. Make sure to describe why you included the chart, and
+what patterns emerged
+
+The first chart that you will create and include will show the trend
+over time of your variable/topic/interest. Think carefully about what
+you want to communicate to your user (you may have to find relevant
+trends in the dataset first!). Here are some requirements to help guide
+your design:
+
+\begin{itemize}
+\item
+  Show more than one, but fewer than \textasciitilde10 trends
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For example, two books, or 5 different mediums
+  \end{itemize}
+\item
+  You must have clear x and y axis labels
+\item
+  The chart needs a clear title~
+\item
+  You need a legend for your different line colors and a clear - legend
+  title In your .Rmd file, make sure to describe why you included the
+  chart, and what patterns emerged
+\end{itemize}
+
+When we say ``clear'' or ``human readable'' titles and labels, that
+means that you should not just display the variable name.
+
+\begin{quote}
+\begin{quote}
+The purpose of this chart was to display the trends over time for the
+two most commonly borrowed material types from the Seattle Public
+Library, which were physical books and e-books, during the period of
+2022 to 2023. The chart illustrated the number of checkouts for both
+types of materials over the course of a year, with clear x and y-axis
+labels and a legend for different line colors. The chart revealed that
+the number of checkouts for physical books remained relatively stable
+throughout the year, with a minor increase during the summer months. In
+contrast, e-book checkouts steadily increased throughout the year and
+peaked in December. This pattern highlighted the rising popularity of
+e-books and how they have increasingly become a preferred option for
+library patrons over the years.
+\end{quote}
+\end{quote}
+
+Here's an example of how to run an R script inside an RMarkdown file:
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\hypertarget{second-trends-over-time-chart}{%
+\subsubsection{Second Trends Over Time
+Chart}\label{second-trends-over-time-chart}}
+
+Include a chart. Make sure to describe why you included the chart, and
+what patterns emerged
+
+The second chart that you will create and include will show another
+trend over time of your variable/topic/interest. Think carefully about
+what you want to communicate to your user (you may have to find relevant
+trends in the dataset first!). Here are some requirements to help guide
+your design:
+
+\begin{itemize}
+\tightlist
+\item
+  Show more than one, but fewer than \textasciitilde10 trends
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For example, two books, or 5 different mediums
+  \end{itemize}
+\item
+  You must have clear x and y axis labels
+\item
+  The chart needs a clear title~
+\item
+  You need a legend for your different line colors and a clear - legend
+  title In your .Rmd file, make sure to describe why you included the
+  chart, and what patterns emerged
+\end{itemize}
+
+When we say ``clear'' or ``human readable'' titles and labels, that
+means that you should not just display the variable name.
+
+Here's an example of how to run an R script inside an RMarkdown file:
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\hypertarget{your-choice}{%
+\subsubsection{Your Choice}\label{your-choice}}
+
+The last chart is up to you. It could be a line plot, scatter plot,
+histogram, bar plot, stacked bar plot, and more. Here are some
+requirements to help guide your design:
+
+\begin{itemize}
+\tightlist
+\item
+  You must have clear x and y axis labels
+\item
+  The chart needs a clear title~
+\item
+  You need a legend for your different line colors and a clear legend
+  title
+\end{itemize}
+
+Here's an example of how to run an R script inside an RMarkdown file:
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\end{document}

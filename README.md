@@ -1,6 +1,6 @@
 # Assignment 3: SPL Library Checkouts
 
-Link to your final GitHub pages site here: https://info-201a-wi23.github.io/a3-spl-starter/index.html (change the link to for your GitHub pages site)
+Link to your final GitHub pages site here: <https://github.com/info-201a-wi23/a3-spl-checkouts-ntab-spec> (change the link to for your GitHub pages site)
 
 In this assignment, you will use your data analysis and visualization skills to analyze patterns and trends in [library circulation data published by the Seattle Public Library](https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6).
 
@@ -12,9 +12,9 @@ The data for this assignment comes from the [Seattle Public Library](https://dat
 
 To access the datasets, you will need to download them as zip files by clicking one or more of the links on Canvas, and then you will need to unzip the file(s) and load the CSV files into RStudio by providing the correct file path(s). 
 
-- Dataset with items checked out at least 5 times a month from 2013-2023 (file size: +1 GB) 
-- Dataset with items checked out at least 10 times a month from 2017-20203 (file size: 229 MB)
-- Dataset with all items checked out in 2022-2023 (file size: 709 MB)
+-   Dataset with items checked out at least 5 times a month from 2013-2023 (file size: +1 GB)
+-   Dataset with items checked out at least 10 times a month from 2017-20203 (file size: 229 MB)
+-   Dataset with all items checked out in 2022-2023 (file size: 709 MB)
 
 The datasets are large, so you should assess how much storage space you have on your computer (Mac / Windows), and then decide which dataset to choose based on that assessment. You are also welcome to create and use your own datasets through the [SPL Open Data portal](https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6/explore).
 
@@ -24,9 +24,9 @@ For example, if you want to compare the number of checkouts for all of the Lord 
 
 For this assignment, you will create a report about library circulation trends, which must include:
 
-- An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
-- A paragraph of summary information, citing at least 5 values calculated from the data
-- A more detailed description of the dataset, who collected/published it, why, and any limitations or problems with the data
-- A first chart that shows trends over time for variables of your choice
-- A second chart that shows trends over time for a variables of your choice
-- A third chart that uses any kind of plot (bar chart, scatterplot, it's up to you)
+-   An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+-   A paragraph of summary information, citing at least 5 values calculated from the data
+-   A more detailed description of the dataset, who collected/published it, why, and any limitations or problems with the data
+-   A first chart that shows trends over time for variables of your choice
+-   A second chart that shows trends over time for a variables of your choice
+-   A third chart that uses any kind of plot (bar chart, scatterplot, it's up to you)
