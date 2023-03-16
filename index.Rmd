@@ -16,12 +16,15 @@ An introduction of the data and a description of the trends/books/items you are 
 
 Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
 
-These will likely be calculated using your DPLYR skills, answering questions such as:
+>>The analysis of the library dataset revealed several key findings. The average checkouts for various material types were calculated, with digital books being a subset of the dataset. The top ten most checked-out books were identified, excluding specific items like headphones and hotspot devices. For physical books, the months with the highest number of checkouts were determined. Additionally, the total checkouts by year were summarized, providing insight into annual trends. Lastly, the most popular fiction books were extracted, showcasing the top checked-out items within this category. Overall, these values offer valuable insights into library usage patterns and preferences.
 
-- What is the average number of checkouts for digital items?
-- What is the top 10 books with the highest number of checkouts in the dataset?
-- What is the the total checkouts of physical books by month?
+summary_text <- paste("In our analysis, we found that the average number of checkouts for digital books was", max(digital_books$avg_checkouts), ".",
+  "The most checked-out book in the dataset was", top_ten_most_checked_out_books$Title[1], "with", top_ten_most_checked_out_books$total_checkouts[1], "total checkouts.",
+  "For physical books, the month with the highest number of checkouts was", most_checkouts_month_physical$CheckoutMonth[1], ", having", most_checkouts_month_physical$total_checkouts[1], "checkouts.",
+  "In the most recent year available, there were", max(total_checkouts_by_year$CheckoutYear), "total checkouts.",
+  "The most popular fiction book was in the", top_fiction_books$MaterialType[1], "category with", top_fiction_books$total_checkouts[1], "total checkouts.")
 
+cat(summary_text)
 
 ### The Dataset
 

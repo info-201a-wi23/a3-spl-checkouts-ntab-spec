@@ -6,6 +6,14 @@ library(stringr)
 
 library_data_set <- read.csv("~/Documents/info201/a3-spl-checkouts-ntab-spec/2022-2023-All-Checkouts-SPL-Data.csv")
 
+"In our analysis, we found that the average number of checkouts for digital books was r max(digital_books$avg_checkouts). 
+The most checked-out book in the dataset was r top_ten_most_checked_out_books$Title[1] with r top_ten_most_checked_out_books$total_checkouts[1] total checkouts.
+For physical books, the month with the highest number of checkouts was r most_checkouts_month_physical$CheckoutMonth[1], having r most_checkouts_month_physical$total_checkouts[1] checkouts. 
+In the most recent year available, there were r max(total_checkouts_by_year$CheckoutYear) total checkouts. 
+The most popular fiction book was in the r top_fiction_books$MaterialType[1] category with r top_fiction_books$total_checkouts[1] total checkouts."
+
+
+
 
 #This code creates a new variable called digital_books by filtering a library dataset based on the MaterialType column containing specific values. 
 #It then groups the resulting subset of data by MaterialType and calculates the mean number of checkouts for each group using the mean() function. 
